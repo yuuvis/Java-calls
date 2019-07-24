@@ -51,4 +51,4 @@ Ocp-Apim-Subscription-Key           string          Subscription key which provi
 
 ### Code samples
 
-[Delete document by ID](./Delete-from-yuuvis®.java)
+[Delete document by ID](./Delete-Object.java)
