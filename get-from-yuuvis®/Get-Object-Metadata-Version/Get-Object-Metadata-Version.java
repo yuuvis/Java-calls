@@ -12,7 +12,7 @@ public class JavaSample{
         HashMap parameterMap = new HashMap();
         String key = "";
         String objectId = "";
-
+        String versionId = "";
 
     	  headerMap.put("Ocp-Apim-Subscription-Key", key);
 
@@ -25,7 +25,7 @@ public class JavaSample{
 
           request = new Request.Builder()
             .headers(headers)
-            .url(baseUrl +"/dms/objects/"+objectId+"/contents/file")
+            .url(baseUrl +"/dms/objects/"+objectId+"/versions/"+versionId)
             .get().build();
 
 

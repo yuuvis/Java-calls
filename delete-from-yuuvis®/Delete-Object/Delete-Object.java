@@ -13,8 +13,7 @@ public class JavaSample{
         String key = "";
         String objectId = "";
 
-
-    	  headerMap.put("Ocp-Apim-Subscription-Key", key);
+    	  headerMap.put("Ocp-Apim-Subscription-Key", "key");
 
         try{
           OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -23,12 +22,12 @@ public class JavaSample{
           Request request = null;
           Headers headers = Headers.of(headerMap);
 
+
+
           request = new Request.Builder()
             .headers(headers)
-            .url(baseUrl +"/dms/objects/"+objectId+"/contents/file")
-            .get().build();
-
-
+            .url(baseUrl + "/dms/objects/"+objectId)
+            .delete().build();
 
         Response response = client.newCall(request).execute();
         System.out.println(response.toString());
