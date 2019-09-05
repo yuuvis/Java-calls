@@ -1,2 +1,2 @@
 # Java-calls
-This houses that yuuvis® API calls related to Java
+This houses the yuuvis® API calls written using Java.
