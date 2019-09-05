@@ -1,31 +1,41 @@
 # Core Capabilities (CRUD)
 
-## Get document index data by ID
+## Update document content by ID
 
-The **"Get document index data by ID"** endpoint returns the index data related to the document (object) that matches the objectId parameter.
+The **"Update document content by ID"** endpoint updates the content file of the document (object) that matches the objectId parameter. You can name the content by passing the file name over to the Content-Disposition header.
 
 
-[Read about Retrieving Documents with the yuuvis® API](https://yuuvis.io/how-to/retrieve)
+[Read about Updating Documents with the yuuvis® API](https://yuuvis.io/how-to/update)
 
-## Request URL
+### Request URL
 
-https://api.yuuvis.io/dms/objects/{objectId}
+https://api.yuuvis.io/dms/objects/{objectId}/contents/file
+
 
 ## Request headers
 
 ```
-Ocp-Apim-Subscription-Key           string           Subscription key which provides access to this API. Found in your Profile.
+Content-Disposition                 string      format: attachment;filename=myfilename
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Content-Type (optional)             string      Media type of the body sent to the API.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Ocp-Apim-Subscription-Key           string      Subscription key which provides access to this API. Found in your Profile.
 
 ```
 
 ## Request body
 
-## Responses
+`application/octet-stream`
 
-## 200 OK
+## Responses        
+
+## 200 OK        
 
 ### OK
-
 
 ## Representations
 
@@ -60,7 +70,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
           "value": "2019-03-20T13:34:20.15Z"
         },
         "enaio:versionNumber": {
-          "value": 1
+          "value": 2
         },
         "enaio:tenant": {
           "value": "heckathon"
@@ -69,7 +79,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
           "value": "49749ababad604f3"
         },
         "Name": {
-          "value": "my document"
+          "value": "Update Email"
         }
       },
       "contentStreams": [
@@ -87,10 +97,11 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
   ]
 }
 ```
-### Schema
+### Scheam
+
 ```
 {
-  "title": "Import Object Response",
+  "title": "Update Metadata Response",
   "required": [
     "objects"
   ],
@@ -205,7 +216,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
             "value": "2019-03-20T13:34:20.15Z"
           },
           "enaio:versionNumber": {
-            "value": 1
+            "value": 2
           },
           "enaio:tenant": {
             "value": "heckathon"
@@ -214,7 +225,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
             "value": "49749ababad604f3"
           },
           "Name": {
-            "value": "my document"
+            "value": "Update Email"
           }
         },
         "contentStreams": [
@@ -236,9 +247,10 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
 
 ## 404 Not Found
 
-### Not Found
+### NOT FOUND
 
 
-### Code samples
 
-[Get document index data by ID](./Get-Object-Metadata.html)
+### Code examples
+
+[Update document content by ID](./Post-Object-Update-Content.html)

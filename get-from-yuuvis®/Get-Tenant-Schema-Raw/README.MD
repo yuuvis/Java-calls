@@ -1,19 +1,11 @@
 # Configuration and Settings
 
-### API change history
-
-[Documentation](https://yuuvis.io/how-to)
-
-
 ## Get the raw tenant schema
 
 The **"Get the raw tenant schema"** endpoint returns the raw schema of the tenant (XML) belonging to you as the logged on user.
 
+
 [Learn about yuuvis® API schemas](https://yuuvis.io/how-to/schema)
-
-[Try It](https://yuuvis.io/docs/services/yuuvis-admin/operations/get-admin-schema/console)
-
-## Request
 
 ## Request URL
 
@@ -189,4 +181,4 @@ Schema
 
 ### Code samples
 
-[Get Raw Tenant Schema](./Get-Tenant-Schema-Raw.java)
+[Get Raw Tenant Schema](./Get-Tenant-Schema-Raw.html)

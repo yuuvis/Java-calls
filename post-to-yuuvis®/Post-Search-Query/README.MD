@@ -1,24 +1,89 @@
 # Core Capabilities (CRUD)
 
-## Get document index data by ID
+## Search documents by search query
 
-The **"Get document index data by ID"** endpoint returns the index data related to the document (object) that matches the objectId parameter.
+The **"Search documents by search query"** endpoint requires a JSON body containing your search query.
+
+The search parameters skipCount and maxItems allow paging for search queries, whereby maxItems defines the maximum number of entries in the hit list and skipCount the maximum number of entries to be skipped.
 
 
-[Read about Retrieving Documents with the yuuvis® API](https://yuuvis.io/how-to/retrieve)
+[Learn about the yuuvis® CMIS-Based Query Language](https://yuuvis.io/how-to/CMIS)
 
 ## Request URL
 
-https://api.yuuvis.io/dms/objects/{objectId}
+https://api.yuuvis.io/dms/objects/search
 
 ## Request headers
 
 ```
-Ocp-Apim-Subscription-Key           string           Subscription key which provides access to this API. Found in your Profile.
+Content-Type (optional)         string      Media type of the body sent to the API.
+----------------------------------------------------------------------------------------------------------------------
+Ocp-Apim-Subscription-Key       string      Subscription key which provides access to this API. Found in your Profile.
 
 ```
-
 ## Request body
+
+A *search query* consists of three parameters:
+
+- **statement** - the SELECT statement (CMIS-Based Query Language)
+- **skipCount** - defines the maximum number of entries to be skipped (for paging)
+-  **maxItems** - defines the maximum number of entries in the hit list
+
+
+`application/json`
+
+### Sample
+
+```
+{
+  "query": {
+    "statement": "SELECT * FROM enaio:object",
+    "skipCount": 0,
+    "maxItems": 50
+  }
+}
+```
+
+### Schema
+```
+ {
+  "title": "Search Request",
+  "required": [
+    "query"
+  ],
+  "type": "object",
+  "properties": {
+    "query": {
+      "required": [
+        "maxItems",
+        "skipCount",
+        "statement"
+      ],
+      "type": "object",
+      "properties": {
+        "statement": {
+          "type": "string"
+        },
+        "skipCount": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxItems": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "example": {
+    "query": {
+      "statement": "SELECT * FROM enaio:object",
+      "skipCount": 0,
+      "maxItems": 50
+    }
+  }
+}
+```
 
 ## Responses
 
@@ -26,14 +91,12 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
 
 ### OK
 
-
 ## Representations
 
 `application/json`
 
 ### Sample
 ```
-
  {
   "objects": [
     {
@@ -84,15 +147,22 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
         }
       ]
     }
-  ]
+  ],
+  "numItems": 1,
+  "hasMoreItems": false,
+  "totalNumItems": 1
 }
 ```
 ### Schema
+
 ```
 {
-  "title": "Import Object Response",
+  "title": "Search Response Object",
   "required": [
-    "objects"
+    "hasMoreItems",
+    "numItems",
+    "objects",
+    "totalNumItems"
   ],
   "type": "object",
   "properties": {
@@ -138,45 +208,16 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
         }
       }
     },
-    "contentStreams": {
-      "type": "array",
-      "items": {
-        "title": "Content Stream Object",
-        "required": [
-          "archivePath",
-          "contentStreamId",
-          "digest",
-          "fileName",
-          "length",
-          "mimeType",
-          "repositoryId"
-        ],
-        "type": "object",
-        "properties": {
-          "contentStreamId": {
-            "type": "string"
-          },
-          "archivePath": {
-            "type": "string"
-          },
-          "length": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "mimeType": {
-            "type": "string"
-          },
-          "fileName": {
-            "type": "string"
-          },
-          "digest": {
-            "type": "string"
-          },
-          "repositoryId": {
-            "type": "string"
-          }
-        }
-      }
+    "numItems": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "hasMoreItems": {
+      "type": "boolean"
+    },
+    "totalNumItems": {
+      "type": "integer",
+      "format": "int64"
     }
   },
   "example": {
@@ -229,16 +270,14 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
           }
         ]
       }
-    ]
+    ],
+    "numItems": 1,
+    "hasMoreItems": false,
+    "totalNumItems": 1
   }
 }
 ```
 
-## 404 Not Found
+### Code example
 
-### Not Found
-
-
-### Code samples
-
-[Get document index data by ID](./Get-Object-Metadata.html)
+[Search documents by search query](./Post-Search-Query.html)

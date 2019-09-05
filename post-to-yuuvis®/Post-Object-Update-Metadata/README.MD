@@ -1,11 +1,14 @@
 # Core Capabilities (CRUD)
 
-## Get document index data by ID
+## Update document index data by ID
 
-The **"Get document index data by ID"** endpoint returns the index data related to the document (object) that matches the objectId parameter.
+The **"Update document index data by ID"** endpoint updates the index data of the document (object) that matches the objectId parameter.
 
+To update the index data send the request with the new index data as request body and the ID of the document (object) as objectId. If one of the properties is missing in the new index data, it will be removed from the document (object).
+Most of the system properties cannot be updated or are updated automatically. If the new index data contains these properties, their values must match the values of the current version. Hence you can retrieve the current index data using the [GET document index data by ID](https://yuuvis.io/docs/services/yuuvis-api/operations/ObjectsByObjectIdGet?) endpoint first, to use the result. Edit some properties and post it again using this endpoint.
+Note that the "Try it" button is not available for this endpoint. You have to try it out externally. Use the provided code samples as a starting point.
 
-[Read about Retrieving Documents with the yuuvis® API](https://yuuvis.io/how-to/retrieve)
+[Read about Updating Documents with the yuuvis® API](https://yuuvis.io/how-to/update)
 
 ## Request URL
 
@@ -14,26 +17,121 @@ https://api.yuuvis.io/dms/objects/{objectId}
 ## Request headers
 
 ```
-Ocp-Apim-Subscription-Key           string           Subscription key which provides access to this API. Found in your Profile.
+Content-Type (optional)             string          Media type of the body sent to the API.
+
+-----------------------------------------------------------------------------------------------------------------------------------
+
+Ocp-Apim-Subscription-Key           string          Subscription key which provides access to this API. Found in your Profile.
 
 ```
 
+
 ## Request body
+
+The updated index data is passed as JSON structure in the body as follows
+
+`application/json`
+
+### Sample
+```
+{
+  "objects": [
+    {
+      "properties": {
+        "enaio:objectTypeId": {
+          "value": "document"
+        },
+        "Name": {
+          "value": "Update Email"
+        }
+      }
+    }
+  ]
+}
+
+```
+### Schema
+```
+{
+  "title": "Update Metadata Request",
+  "required": [
+    "objects"
+  ],
+  "type": "object",
+  "properties": {
+    "objects": {
+      "type": "array",
+      "items": {
+        "title": "Metadata Object",
+        "required": [
+          "properties"
+        ],
+        "type": "object",
+        "properties": {
+          "properties": {
+            "required": [
+              "enaio:objectTypeId"
+            ],
+            "type": "object",
+            "properties": {
+              "enaio:objectTypeId": {
+                "required": [
+                  "value"
+                ],
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "Name": {
+                "required": [
+                  "value"
+                ],
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "example": {
+    "objects": [
+      {
+        "properties": {
+          "enaio:objectTypeId": {
+            "value": "document"
+          },
+          "Name": {
+            "value": "Update Email"
+          }
+        }
+      }
+    ]
+  }
+}
+```
 
 ## Responses
 
-## 200 OK
+## 200 OK      
 
-### OK
-
+### OK           
 
 ## Representations
 
 `application/json`
 
 ### Sample
-```
 
+```
  {
   "objects": [
     {
@@ -60,7 +158,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
           "value": "2019-03-20T13:34:20.15Z"
         },
         "enaio:versionNumber": {
-          "value": 1
+          "value": 2
         },
         "enaio:tenant": {
           "value": "heckathon"
@@ -69,7 +167,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
           "value": "49749ababad604f3"
         },
         "Name": {
-          "value": "my document"
+          "value": "Update Email"
         }
       },
       "contentStreams": [
@@ -88,9 +186,10 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
 }
 ```
 ### Schema
+
 ```
 {
-  "title": "Import Object Response",
+  "title": "Update Metadata Response",
   "required": [
     "objects"
   ],
@@ -205,7 +304,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
             "value": "2019-03-20T13:34:20.15Z"
           },
           "enaio:versionNumber": {
-            "value": 1
+            "value": 2
           },
           "enaio:tenant": {
             "value": "heckathon"
@@ -214,7 +313,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
             "value": "49749ababad604f3"
           },
           "Name": {
-            "value": "my document"
+            "value": "Update Email"
           }
         },
         "contentStreams": [
@@ -234,11 +333,10 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
 }
 ```
 
-## 404 Not Found
+##  404 Not Found
 
 ### Not Found
 
-
 ### Code samples
 
-[Get document index data by ID](./Get-Object-Metadata.html)
+[Update document index data by ID](./Post-Object-Update-Metadata.html)

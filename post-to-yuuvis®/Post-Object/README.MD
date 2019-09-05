@@ -1,40 +1,73 @@
 # Core Capabilities (CRUD)
 
-## Get document index data by ID
+## Store one or more documents
 
-The **"Get document index data by ID"** endpoint returns the index data related to the document (object) that matches the objectId parameter.
+The **"Store one or more documents"** endpoint requires a multipart body with an index data parameter as well as a binary content parameter.
+
+Save your metadata as file (e.g. metadata.json) and use it for the data parameter. For the binary content, the cid_63apple parameter, you can use any file you'd like to store.
+
+If the request is successful, the index data of the previously stored document will be returned in JSON format.
+
+[Read about Storing Documents with the yuuvis® API](https://yuuvis.io/how-to/import)
 
 
-[Read about Retrieving Documents with the yuuvis® API](https://yuuvis.io/how-to/retrieve)
+### Request URL
 
-## Request URL
-
-https://api.yuuvis.io/dms/objects/{objectId}
+https://api.yuuvis.io/dms/objects
 
 ## Request headers
 
-```
-Ocp-Apim-Subscription-Key           string           Subscription key which provides access to this API. Found in your Profile.
+Content-Type (optional) string Media type of the body sent to the API.
+Ocp-Apim-Subscription-Key string Subscription key which provides access to this API. Found in your Profile.
+ Request body
+
+This endpoint takes in either a multipart/form-data body or a single metadata JSON file. The latter is only permissable if the DocumentType referenced in the metadata file allows for missing content.
 
 ```
+-**data** *required
+string ($binary)
+yuuvis® metadata for the document (object) to be imported as JSON file
 
-## Request body
+-**cid_63apple** *optional depending on schema
+string ($binary)
+document (object) itself to be imported as binary file
+```
+
+Note: Make sure the CID `cid_63apple` matches the contentStreamID referenced in the posted metadata data
+
+Metadata Example, JSON Format
+
+```
+{
+  "objects": [{
+      "properties": {
+          "enaio:objectTypeId": {
+                "value": "document"
+          },
+          "Name": {
+                "value": "my document"
+          }
+      },
+      "contentStreams": [{
+            "cid": "cid_63apple"
+      }]
+  }]
+}
+ ```
 
 ## Responses
 
-## 200 OK
+## 200 OK                         
 
-### OK
-
+### OK                           
 
 ## Representations
 
-`application/json`
 
-### Sample
+### sample
 ```
 
- {
+{
   "objects": [
     {
       "properties": {
@@ -88,6 +121,7 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
 }
 ```
 ### Schema
+
 ```
 {
   "title": "Import Object Response",
@@ -233,12 +267,10 @@ Ocp-Apim-Subscription-Key           string           Subscription key which prov
   }
 }
 ```
+## 401 Unauthorized
 
-## 404 Not Found
+###   Unauthorized
 
-### Not Found
+### Code example
 
-
-### Code samples
-
-[Get document index data by ID](./Get-Object-Metadata.html)
+[Mulitpart-body post request](./Post-Object.html)
