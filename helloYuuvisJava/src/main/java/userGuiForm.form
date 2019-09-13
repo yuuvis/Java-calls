@@ -18,7 +18,7 @@
         <children>
           <component id="4b0ab" class="javax.swing.JLabel" binding="importLabel">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="Let's Import a document. Select a file."/>
@@ -186,7 +186,7 @@
           </component>
           <component id="c7ded" class="javax.swing.JLabel" binding="updateLabel">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="7" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <text value="We can also update the document. Input a text file for full text Indexing!"/>
@@ -222,7 +222,7 @@
       </grid>
       <scrollpane id="748f7" binding="resultPanel">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="1" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
         <border type="none"/>
@@ -230,7 +230,7 @@
           <scrollpane id="3b1ad" binding="resultScrollPane" custom-create="true">
             <constraints/>
             <properties>
-              <horizontalScrollBarPolicy value="32"/>
+              <horizontalScrollBarPolicy value="31"/>
               <verticalScrollBarPolicy value="22"/>
             </properties>
             <border type="none"/>
