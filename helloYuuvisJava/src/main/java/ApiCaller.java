@@ -95,10 +95,10 @@ public class ApiCaller {
      * @param objectId
      * @return
      */
-    public Response deleteObjectById(String objectId) throws IOException {
+    public Response deleteObjectById(String objectId, String versionId) throws IOException {
         Request deleteRequest = new Request.Builder()
                 .header("Ocp-Apim-Subscription-Key", key)
-                .url(baseURL + "/dms/objects/" + objectId)
+                .url(baseURL + "/dms/objects/" + objectId + "/versions/" +versionId)
                 .delete()
                 .build();
 

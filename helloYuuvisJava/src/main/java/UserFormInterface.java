@@ -113,8 +113,17 @@ public class UserFormInterface {
                         Response lastResponse = apiCaller.getFileByObjectId(objectId);
                         lastStatus[0] = String.valueOf(lastResponse.code());
                         getSuccessLabel.setText(lastStatus[0]);
-                        lastResponseString = lastResponse.body().string();
-                        resultTextArea.setText("Displaying the Content of the object with ID: "+objectId+"\n\n"+lastResponseString);
+                        if(lastStatus[0].equals("200")){
+                            String contentType = lastResponse.header("Content-Type");
+                            if(contentType.equals("text/html")){
+                                lastResponseString = lastResponse.body().string();
+                                resultTextArea.setText("Displaying the Content of the object with ID: "+objectId+"\n\n"+lastResponseString);
+                            }else{
+                                resultTextArea.setText("Content of the object with ID: "+objectId+" successfully retrieved, but cannot be displayed due to content type "+contentType);
+                            }
+                        }
+
+
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -141,7 +150,12 @@ public class UserFormInterface {
                         lastStatus[0] = String.valueOf(lastResponse.code());
                         updateSuccessLabel.setText(lastStatus[0]);
                         lastResponseString = lastResponse.body().string();
-                        resultTextArea.setText("Successfully updated object with ID: "+objectId+"\n\n"+lastResponseString);
+                        if(lastStatus[0].equals("200")){
+                            resultTextArea.setText("Successfully updated object with ID: "+objectId+"\n\n"+lastResponseString);
+                        } else {
+                            resultTextArea.setText("Something went wrong when trying to update: "+objectId+"\n\n"+lastResponseString);
+
+                        }
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -172,6 +186,7 @@ public class UserFormInterface {
             public void actionPerformed(ActionEvent e) {
                 key[0] = inputYourSubscriptionKeyTextField.getText();
                 String objectId = updateOidTextField.getText();
+                String versionNr = versionNurmberTextField.getText();
                 if(apiCaller == null | lastStatus.equals("401")){
                     //rebuild API caller with new subscription key
                     apiCaller = new ApiCaller(key[0]);
@@ -180,12 +195,12 @@ public class UserFormInterface {
                     resultTextArea.setText("Object ID invalid!");
                 } else {
                     try {
-                        Response lastResponse = apiCaller.deleteObjectById(objectId);
+                        Response lastResponse = apiCaller.deleteObjectById(objectId, versionNr);
                         lastStatus[0] = String.valueOf(lastResponse.code());
                         deleteSuccessLabel.setText(lastStatus[0]);
                         lastResponseString = lastResponse.body().string();
                         if(lastStatus[0].equals("200")){
-                            resultTextArea.setText("Successfully deleted object with ID: "+ objectId);
+                            resultTextArea.setText("Successfully deleted version "+versionNr+" of object with ID: "+ objectId);
                         }else{
                             resultTextArea.setText("Something went wrong with the deletion of object with ID: "+objectId);
                         }
@@ -281,7 +296,7 @@ public class UserFormInterface {
 
     public static void main(String[] args) {
         UserFormInterface ufi = new UserFormInterface();
-        JFrame mainFrame = new JFrame("Hello Yuuvis");
+        JFrame mainFrame = new JFrame("Hello yuuvis®");
         mainFrame.setSize(700, 800);
         mainFrame.setContentPane(ufi.mainPanel);
 
