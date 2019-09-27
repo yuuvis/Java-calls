@@ -1,68 +1,13 @@
-# Core Capabilities (CRUD)
-
-## Get the applied tenant schema
-
-The **"Get the applied tenant schema"** endpoint returns the applied schema of the tenant (JSON / XML) belonging to you as the logged on user. The applied schema is the tenant schema, enhanced by the global schema and the system properties.
-
-
-[Learn about yuuvis® API schemas](https://yuuvis.io/how-to/schema)
-
 ## Request URL
 
-https://api.yuuvis.io/dms/schema/native
+https://api.yuuvis.io/dms/schema
 
 ## Request headers
 
-```
-Ocp-Apim-Subscription-Key           string          Subscription key which provides access to this API. Found in your Profile.
-```
+| Header                    | Type   | Meaning                                                                                             |
+|---------------------------|--------|-----------------------------------------------------------------------------------------------------|
+| Ocp-Apim-Subscription-Key | String | Subscription key which provides access to the API. Found on the Subscriptions page of your account. |
 
-## Request body
+[Documentation: Get Applied Tenant Schema](https://github.com/yuuvis/Documentation/wiki/Schema-definition#SchemaDefinition-RetrieveSchema)
 
-## Responses
-
-## 200 OK
-
-### OK
-
-
-## Representations
-
-`application/json`
-
-```
-Sample
-
-{}
-
-Schema
-
-{
-  "type": "object"
-}
-```
-
-`application/xml`
-
-```
-Sample
-
-{
-  "type": "object"
-}
-
-Schema
-
- {
-  "type": "object"
-}
-
-```
-
-## 403 Forbidden
-
-### Forbidden
-
-### Code samples
-
-[Get applied Tenant Schema](./Get-Tenant-Schema-Applied.html)
+[Try out the endpoint in our developer portal](https://ateamk8s.azurewebsites.net/Apis/Endpoints/admin-api)

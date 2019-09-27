@@ -1,39 +1,13 @@
-# Core Capabilities (CRUD)
+## Request URL
 
-## Get a text rendition
-
-The **"Get a text rendition"** endpoint generates and returns a text rendition of the content of the document (object) that matches the objectId parameter.
-
-
-[Read about Retrieving Document Renditions with the yuuvis® API](https://yuuvis.io/how-to/rendition)
-
-### Request URL
-
-https://api.yuuvis.io/dms/objects/{objectId}/contents/renditions/text
+https://api.yuuvis.io/dms/objects/{objectId}/contents/renditions/slide
 
 ## Request headers
 
-```
-Ocp-Apim-Subscription-Key           string          Subscription key which provides access to this API. Found in your Profile.
+| Header                    | Type   | Meaning                                                                                             |
+|---------------------------|--------|-----------------------------------------------------------------------------------------------------|
+| Ocp-Apim-Subscription-Key | String | Subscription key which provides access to the API. Found on the Subscriptions page of your account. |
 
-```
+[Documentation: Get an objects' Image Slide Rendition](https://github.com/yuuvis/Documentation/wiki/Rendition-requests)
 
-## Request body
-
-## Responses
-
-## 200 OK
-
-### OK
-
-## Representations
-
-`text/plain`
-
-## 404 Not Found
-
-### NOT FOUND
-
-### Code samples
-
-[Get a text rendition](./Get-Rendition-Text.html)
+[Try out the endpoint in our developer portal](https://ateamk8s.azurewebsites.net/Apis/Endpoints/view-api)

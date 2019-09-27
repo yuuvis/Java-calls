@@ -7,12 +7,12 @@ public class JavaSample{
         public static final MediaType PLAINTEXT = MediaType.parse("text/plain; charset=utf-8");
         public static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
         public static final String baseUrl = "https://api.yuuvis.io";
-    
+
     public static void main (String[] args){
         HashMap headerMap = new HashMap();
         HashMap parameterMap = new HashMap();
         String key = "";
-        
+
 
     	  headerMap.put("Content-Disposition", "");
     	  headerMap.put("Content-Type", "application/octet-stream");
@@ -27,14 +27,14 @@ public class JavaSample{
 
 
           RequestBody body = null;
-          
-          
+
+
 
           //relative path to your content file
           String contentFilePath = "";
           //update content RequestBody
           body = RequestBody.create(PLAINTEXT, new File(contentFilePath));
-          
+
           request = new Request.Builder()
             .headers(headers)
             .url(baseUrl + "/dms/objects/{objectId}/contents/file")
