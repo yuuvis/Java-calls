@@ -1,42 +1,42 @@
 import okhttp3.*;
 import java.util.HashMap;
+import java.util.Map;
 
-public class JavaSample{
+public class GetRenditionPDFVersion
+{
+
+    public static final String BASEURL = "https://api.yuuvis.io"+"/dms-view";
+
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        public static final MediaType PLAINTEXT = MediaType.parse("text/plain; charset=utf-8");
-        public static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
-        public static final String baseUrl = "https://api.yuuvis.io";
+    public static final MediaType PLAINTEXT = MediaType.parse("text/plain; charset=utf-8");
+    public static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
 
-    public static void main (String[] args){
-        HashMap headerMap = new HashMap();
-        HashMap parameterMap = new HashMap();
+    public static void main(String[] args)
+    {
+        Map<String,String> headerMap = new HashMap<>();
         String key = "";
         String objectId = "";
-        String versionId = "";
+        String versionNumber = "";
 
+        headerMap.put("Ocp-Apim-Subscription-Key", key);
 
-    	  headerMap.put("Ocp-Apim-Subscription-Key", key);
+        try
+        {
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            OkHttpClient client = builder.build();
 
-        try{
-          OkHttpClient.Builder builder = new OkHttpClient.Builder();
-          OkHttpClient client = builder.build();
+            Request request = null;
+            Headers headers = Headers.of(headerMap);
 
-          Request request = null;
-          Headers headers = Headers.of(headerMap);
+            request = new Request.Builder().headers(headers).url(BASEURL + "/objects/" + objectId + "/versions/" + versionNumber + "/contents/renditions/pdf").get().build();
 
-          request = new Request.Builder()
-            .headers(headers)
-            .url(baseUrl +"/dms/objects/"+objectId+"/versions/"+versionId+"/contents/renditions/pdf")
-            .get().build();
+            Response response = client.newCall(request).execute();
+            System.out.println(response.toString());
 
-
-
-        Response response = client.newCall(request).execute();
-        System.out.println(response.toString());
-
-
-        } catch(Exception e) {
-          e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
     }

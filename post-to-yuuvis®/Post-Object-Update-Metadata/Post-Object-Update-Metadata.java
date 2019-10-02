@@ -1,52 +1,50 @@
 import okhttp3.*;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
-public class JavaSample{
+public class PostObjectUpdateMetadata
+{
+
+    public static final String BASEURL = "https://api.yuuvis.io"+"/dms-core";
+
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        public static final MediaType PLAINTEXT = MediaType.parse("text/plain; charset=utf-8");
-        public static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
-        public static final String baseUrl = "https://api.yuuvis.io";
-    
-    public static void main (String[] args){
-        HashMap headerMap = new HashMap();
-        HashMap parameterMap = new HashMap();
+    public static final MediaType PLAINTEXT = MediaType.parse("text/plain; charset=utf-8");
+    public static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
+
+    public static void main(String[] args)
+    {
+        Map<String, String> headerMap = new HashMap<>();
         String key = "";
-        
+        String objectId = "";
 
-    	  headerMap.put("Content-Type", "application/json");
-    	  headerMap.put("Ocp-Apim-Subscription-Key", "{subscription key}");
+        headerMap.put("Content-Type", "application/json");
+        headerMap.put("Ocp-Apim-Subscription-Key", key);
 
-        try{
-          OkHttpClient.Builder builder = new OkHttpClient.Builder();
-          OkHttpClient client = builder.build();
+        try
+        {
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            OkHttpClient client = builder.build();
 
-          Request request = null;
-          Headers headers = Headers.of(headerMap);
+            Request request = null;
+            Headers headers = Headers.of(headerMap);
 
+            RequestBody body = null;
 
-          RequestBody body = null;
-          
-          
+            // relative path to your metadata file
+            String metaDataFilePath = "";
+            body = RequestBody.create(new File(metaDataFilePath), JSON);
 
-         //relative path to your metadata file
-          String metaDataFilePath = "";
-          body = RequestBody.create(JSON, new File(metaDataFilePath));
-          
-          request = new Request.Builder()
-            .headers(headers)
-            .url(baseUrl + "/dms/objects/{objectId}")
-            .post(body)
-            .build();
+            request = new Request.Builder().headers(headers).url(BASEURL + "/objects/" + objectId).post(body).build();
 
+            Response response = client.newCall(request).execute();
+            System.out.println(response.toString());
+            System.out.println(response.body().string());
 
-        Response response = client.newCall(request).execute();
-        System.out.println(response.toString());
-        System.out.println(response.body().string());
-
-
-        } catch(Exception e) {
-          e.printStackTrace();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
         }
 
     }

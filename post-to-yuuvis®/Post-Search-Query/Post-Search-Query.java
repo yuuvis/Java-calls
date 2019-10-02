@@ -6,16 +6,16 @@ public class JavaSample{
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         public static final MediaType PLAINTEXT = MediaType.parse("text/plain; charset=utf-8");
         public static final MediaType XML = MediaType.parse("application/xml; charset=utf-8");
-        public static final String baseUrl = "https://api.yuuvis.io";
-    
+        public static final String baseUrl = "https://api.yuuvis.io"+"/dms-core";
+
     public static void main (String[] args){
         HashMap headerMap = new HashMap();
         HashMap parameterMap = new HashMap();
         String key = "";
-        
+
 
     	  headerMap.put("Content-Type", "application/json");
-    	  headerMap.put("Ocp-Apim-Subscription-Key", "{subscription key}");
+    	  headerMap.put("Ocp-Apim-Subscription-Key", key);
 
         try{
           OkHttpClient.Builder builder = new OkHttpClient.Builder();
@@ -26,8 +26,8 @@ public class JavaSample{
 
 
           RequestBody body = null;
-          
-          
+
+
 
         //relative path to your query file
         String queryFilePath = "";
@@ -35,7 +35,7 @@ public class JavaSample{
 
           request = new Request.Builder()
             .headers(headers)
-            .url(baseUrl + "/dms/objects/search")
+            .url(baseUrl + "/objects/search")
             .post(body)
             .build();
 
