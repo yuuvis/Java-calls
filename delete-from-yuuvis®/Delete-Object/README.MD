@@ -1,6 +1,6 @@
 ## Request URL
 
-https://api.yuuvis.io/dms/objects/{objectId}
+https://api.yuuvis.io/dms-core/objects/{objectId}
 
 ## Request headers
 
