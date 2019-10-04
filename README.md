@@ -1,6 +1,8 @@
 # Java-calls
 This repository houses the yuuvis® API calls written using Java.
 
+We make use of the okhttp3, HashMap, Map, File, and Java libraries to makes these API calls.
+
 To learn more about yuuvis® products, please refer to [yuuvis.io](https://yuuvis.io/), try out endpoints in our [developer portal](https://yuuvis.io/Apis/Endpoints/) or visit our [Wiki](https://github.com/yuuvis/Documentation/wiki) for more detailed information ...
 
 &rarr; further yuuvis® repositories: 
