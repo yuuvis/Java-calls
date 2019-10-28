@@ -6,7 +6,7 @@ https://api.yuuvis.io/dms-core/objects/{objectId}/actions/validate/digest
 |---------------------------|--------|-----------------------------------------------------------------------------------------------------|
 | Ocp-Apim-Subscription-Key | String | Subscription key which provides access to the API. Found on the Subscriptions page of your account. |
 
-&rarr; [Code example: Get Validate Content by ID](./Get-Object-Content-Digest.py)
+&rarr; [Code example: Get Validate Content by ID](https://github.com/yuuvis/Java-calls/blob/master/get-from-yuuvis%C2%AE/Get-Object-Content-Digest/Get-Object-Content-Digest.java)
 
 &rarr; [Documentation: Content Digest - Generation and Validation](https://github.com/yuuvis/Documentation/wiki/Import-and-store#ImportingDocumentsviaCoreAPI-ContentDigestGeneration)
 
