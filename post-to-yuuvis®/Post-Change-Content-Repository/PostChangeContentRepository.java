@@ -3,7 +3,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PostObjectUpdateMetadata
+public class PostChangeContentRepository
 {
 
     public static final String BASEURL = "https://api.yuuvis.io"+"/dms-core";

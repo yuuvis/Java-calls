@@ -32,6 +32,8 @@ public class GetObjectMetadata
 
             Response response = client.newCall(request).execute();
             System.out.println(response.toString());
+            System.out.println(response.body().string());
+
 
         }
         catch (Exception e)
