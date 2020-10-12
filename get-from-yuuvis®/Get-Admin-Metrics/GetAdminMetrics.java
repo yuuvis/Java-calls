@@ -13,7 +13,7 @@ public class GetAdminMetrics
     public static void main(String[] args)
     {
         Map<String, String> headerMap = new HashMap<>();
-        String key = "5f0a8c7a1f924f76bb4875f71eb136c4";
+        String key = "";
 
         headerMap.put("Ocp-Apim-Subscription-Key", key);
 
